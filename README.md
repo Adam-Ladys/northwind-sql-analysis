@@ -60,6 +60,19 @@ northwind-sql-analysis/
 
 └── screenshots/
 
+## Database Schema
+
+The Northwind database contains:
+
+| Table | Description |
+|------|-------------|
+| customers | Customer information |
+| orders | Sales transactions |
+| order_details | Product details per order |
+| products | Product catalog |
+| employees | Company employees |
+| suppliers | Product suppliers |
+| categories | Product categories |
 
 ## Objectives
 
