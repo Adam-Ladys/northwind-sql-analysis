@@ -20,7 +20,6 @@ The project demonstrates SQL skills including:
 - JOIN operations
 - Subqueries
 - Common Table Expressions (CTE)
-- Window Functions
 
 
 ## Database
