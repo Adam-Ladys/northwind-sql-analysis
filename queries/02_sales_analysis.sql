@@ -35,3 +35,20 @@ INNER JOIN order_details od
 GROUP BY period 
 ORDER BY period;
 
+-- Business Question:
+-- Which country generates the most revenue for Northwind Traders?
+-- Purpose: identify the top-performing geographic market,
+-- useful for prioritizing regional sales/marketing efforts.
+
+SELECT 
+    c.country_region, 
+    -- Net revenue = (qty * unit price) minus the discount percentage applied
+    SUM(od.quantity * od.unit_price * (1 - od.discount)) AS total_amount
+FROM customers c  
+INNER JOIN orders o 
+    ON c.id = o.customer_id 
+INNER JOIN order_details od
+    ON od.order_id = o.id 
+GROUP BY c.country_region
+ORDER BY total_amount DESC 
+LIMIT 1;
