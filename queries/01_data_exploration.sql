@@ -1,5 +1,5 @@
--- Northwind SQL Business Analysis 
--- SECTION 01: Data Exploration  
+--          Northwind SQL Business Analysis 
+--          SECTION 01: Data Exploration  
 
 
 -- Business Question:
@@ -24,3 +24,15 @@ FROM orders;
 SELECT category, COUNT(*) AS total_products
 FROM products 
 GROUP BY category;
+
+-- Identify customers in Seattle.
+
+SELECT first_name, last_name, company, job_title, address, city
+FROM customers 
+WHERE city = 'Seattle';
+
+-- Count all customers by city.
+
+SELECT city, COUNT(*) AS customer_count
+FROM customers
+GROUP BY city;
