@@ -31,3 +31,20 @@ SELECT COUNT(*) AS inactive_clients
 FROM customers c 
 LEFT JOIN orders o ON c.id = o.customer_id 
 WHERE o.customer_id IS NULL;
+
+-- Business Question:
+-- What is the average number of orders placed per customer?
+-- Purpose: understand customer purchase frequency — a customer who
+-- orders often carries more long-term value, even with a smaller basket.
+
+WITH count_orders AS (
+    SELECT 
+        c.id, 
+        COUNT(o.id) AS total_orders
+    FROM customers c
+    INNER JOIN orders o 
+        ON c.id = o.customer_id 
+    GROUP BY c.id, c.company, c.last_name, c.first_name, c.job_title
+) 
+SELECT AVG(total_orders) AS average_total_order
+FROM count_orders;
