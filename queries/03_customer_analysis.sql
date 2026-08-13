@@ -48,3 +48,16 @@ WITH count_orders AS (
 ) 
 SELECT AVG(total_orders) AS average_total_order
 FROM count_orders;
+
+-- Business Question:
+-- Which customers have placed no orders in the last 12 months
+-- (relative to the most recent order date in the dataset)?
+-- Purpose: identify previously active customers who have gone
+-- quiet — priority targets for re-engagement, unlike Q2 which
+-- targets customers who never ordered at all.
+
+SELECT c.id, c.company, c.last_name, c.first_name, MAX(o.order_date) AS last_order_date
+FROM customers c
+INNER JOIN orders o ON c.id = o.customer_id
+GROUP BY c.id, c.company, c.last_name, c.first_name
+HAVING MAX(o.order_date) < (SELECT DATE_SUB(MAX(order_date), INTERVAL 12 MONTH) FROM orders);
