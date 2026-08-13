@@ -52,3 +52,21 @@ INNER JOIN order_details od
 GROUP BY c.country_region
 ORDER BY total_amount DESC 
 LIMIT 1;
+
+-- Business Question:
+-- What is the average order value (basket size)?
+-- Purpose: understand typical transaction value — helps decide whether
+-- commercial efforts should target more customers or bigger baskets.
+
+WITH total AS (
+    SELECT 
+        o.id,
+        -- Net revenue per order = (qty * unit price) minus the discount percentage applied
+        SUM(od.quantity * od.unit_price * (1 - od.discount)) AS total_amount
+    FROM orders o 
+    INNER JOIN order_details od 
+        ON o.id = od.order_id 
+    GROUP BY o.id 
+) 
+SELECT AVG(total_amount) AS average_amount 
+FROM total;
