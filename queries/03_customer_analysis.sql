@@ -21,3 +21,13 @@ INNER JOIN order_details od
 GROUP BY c.id 
 ORDER BY total_amount DESC
 LIMIT 10;
+
+-- Business Question:
+-- How many customers have never placed an order?
+-- Purpose: identify inactive customers — useful for re-engagement
+-- campaigns or cleaning/qualifying the customer database.
+
+SELECT COUNT(*) AS inactive_clients
+FROM customers c 
+LEFT JOIN orders o ON c.id = o.customer_id 
+WHERE o.customer_id IS NULL;
